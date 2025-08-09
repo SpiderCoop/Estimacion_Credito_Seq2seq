@@ -584,6 +584,9 @@ class Seq2seq_MultiHorizon_Quantile_Recurrent_Forecaster(pl.LightningModule):
                 hist_lag = slice(initial_pred_date_idx - self.hist_len - self.lag, initial_pred_date_idx - self.lag)
                 fut_lag = slice(initial_pred_date_idx - self.lag, initial_pred_date_idx + self.horizon - self.lag)
 
+                # Verificamos la longitud 
+                assert (hist_lag.start >= 0), f"Datos insuficientes para la predicción. Es necesario agregar {np.abs(hist_lag.start)} periodos adicionales hacia atras"
+
                 x_hist_lag = df_norm.iloc[hist_lag][target_col].values.astype(np.float32)
                 x_fut_lag = df_norm.iloc[fut_lag][target_col]
 
