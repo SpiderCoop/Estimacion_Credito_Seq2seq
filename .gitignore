@@ -38,4 +38,5 @@ config/credentials.yml
 # Personal files
 .env
 *.pdf
+*.pptx
 /lightning_logs
